@@ -3,7 +3,7 @@
 // buil-n lin in NodeJS 
 const net = require('net');
 // regular port 
-const PORT = process.env.PORT || 3000 ;
+const PORT = process.env.PORT || 3001 ;
 // create server with .net 
 const server = net.createServer();
 
