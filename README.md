@@ -7,7 +7,7 @@
 - [ci/cd](https://github.com/401-advanced-javascript-Nawal/Lab-17-TCP-MSG/actions)
 
 ### Setup
-- install the needed Dependencies JEST ESLINT NET INQUORER UUID and use npm START/NODEMON to run it 
+- install the needed Dependencies NET and use npm START/NODEMON to run it 
 
 #### `.env` requirements
 - `PORT` - Port Number
