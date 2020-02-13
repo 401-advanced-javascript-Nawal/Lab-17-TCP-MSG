@@ -7,6 +7,7 @@ const util = require('util');
 const client = new net.Socket();
 
 const reader = ('./lib/reader.js');
+client.connect(3001, 'localhost', () => { });
 
 /***************************************** Read / Write File System **************************************************/
 // FS File( read , write )
@@ -46,5 +47,16 @@ const writeFile = (file, data) => {
     writeFilepromisify(file, data);
     return data;
 };
+
+function sendEvent(quit) {
+    const events = ['create', 'foo', 'read', 'baz', 'update', 'bing', 'rain', 'attack', 'error', 'bark', 'error'];
+    let eventName = events[Math.floor(Math.random() * events.length)];
+    let event = JSON.stringify({ event: eventName, payload: `${eventName} just happened!` });
+    client.write(event, () => {
+      if (quit) { client.end(); }
+    });
+  }
+
+  sendEvent(true);
 
 // client.write(`save ${file}`);
