@@ -1,6 +1,7 @@
 'user strict';
 
 const net = require('net');
+const inquirer = require('inquirer');
 const fs = require('fs');
 const util = require('util');
 
@@ -48,15 +49,13 @@ const writeFile = (file, data) => {
     return data;
 };
 
-function sendEvent(quit) {
-    const events = ['create', 'foo', 'read', 'baz', 'update', 'bing', 'rain', 'attack', 'error', 'bark', 'error'];
-    let eventName = events[Math.floor(Math.random() * events.length)];
-    let event = JSON.stringify({ event: eventName, payload: `${eventName} just happened!` });
-    client.write(event, () => {
-      if (quit) { client.end(); }
-    });
-  }
 
-  sendEvent(true);
-
-// client.write(`save ${file}`);
+client.on('data', (data) => {
+    let event = JSON.parse(data);
+    if (event.event === 'message') {
+        messages.push(event.payload);
+        console.clear();
+        messages.forEach(message => console.log(message));
+        console.log('');
+    }
+});
